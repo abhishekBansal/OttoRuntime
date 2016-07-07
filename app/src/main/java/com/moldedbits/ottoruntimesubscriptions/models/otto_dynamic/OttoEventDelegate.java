@@ -1,11 +1,6 @@
 package com.moldedbits.ottoruntimesubscriptions.models.otto_dynamic;
 
-import com.knomatic.BaseApplication;
-import com.moldedbits.ottoruntimesubscriptions.models.events.OttoEvent;
-import com.squareup.otto.Subscribe;
-
-import lombok.Getter;
-import lombok.Setter;
+import com.moldedbits.ottoruntimesubscriptions.BaseApplication;
 
 /**
  * A class which essentially just pass around an otto event
@@ -13,8 +8,7 @@ import lombok.Setter;
  * Created by abhishek on 05/07/16.
  */
 
-public class OttoEventDelegate {
-    @Getter @Setter
+public abstract class OttoEventDelegate {
     private OttoEventListener ottoEventListener;
 
     public OttoEventDelegate(OttoEventListener ottoEventListener) {
@@ -29,8 +23,11 @@ public class OttoEventDelegate {
         BaseApplication.getInstance().getBus().unregister(this);
     }
 
-    @Subscribe
-    public void onOttoEvent(OttoEvent event) {
-        getOttoEventListener().onEventReceived(event);
+    public OttoEventListener getOttoEventListener() {
+        return ottoEventListener;
+    }
+
+    public void setOttoEventListener(OttoEventListener ottoEventListener) {
+        this.ottoEventListener = ottoEventListener;
     }
 }
