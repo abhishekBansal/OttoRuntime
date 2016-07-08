@@ -6,4 +6,15 @@ package com.moldedbits.ottoruntimesubscriptions.models.events;
  */
 
 public class Event1 extends OttoEvent{
+    private String string;
+
+    public Event1(String string) {this.string = string;}
+
+    public String getString() {
+        return string;
+    }
+
+    public void setString(String string) {
+        this.string = string;
+    }
 }

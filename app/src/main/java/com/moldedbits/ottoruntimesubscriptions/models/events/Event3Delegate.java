@@ -9,14 +9,14 @@ import com.squareup.otto.Subscribe;
  * Created by abhishek on 07/07/16.
  */
 
-public class Event1Delegate extends OttoEventDelegate {
+public class Event3Delegate extends OttoEventDelegate {
 
-    public Event1Delegate(OttoEventListener ottoEventListener) {
+    public Event3Delegate(OttoEventListener ottoEventListener) {
         super(ottoEventListener);
     }
 
     @Subscribe
-    public void onOttoEvent(Event1 event) {
+    public void onOttoEvent(Event3 event) {
         getOttoEventListener().onEventReceived(event);
     }
 }
