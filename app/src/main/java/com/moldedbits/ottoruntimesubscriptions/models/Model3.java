@@ -3,6 +3,7 @@ package com.moldedbits.ottoruntimesubscriptions.models;
 import com.moldedbits.ottoruntimesubscriptions.models.events.Event3;
 import com.moldedbits.ottoruntimesubscriptions.models.events.Event3Delegate;
 import com.moldedbits.ottoruntimesubscriptions.models.events.OttoEvent;
+import com.moldedbits.ottoruntimesubscriptions.models.otto_dynamic.OttoEventDelegate;
 import com.moldedbits.ottoruntimesubscriptions.models.otto_dynamic.OttoEventListener;
 
 import timber.log.Timber;
@@ -13,7 +14,7 @@ import timber.log.Timber;
  */
 
 public class Model3 extends Model {
-    private Event3Delegate mDelegate;
+    private OttoEventDelegate mDelegate;
 
     public Model3() {
         super(ModelType.MODEL_3);
