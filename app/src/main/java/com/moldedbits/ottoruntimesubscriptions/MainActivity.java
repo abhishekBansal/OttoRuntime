@@ -9,18 +9,21 @@ import android.view.View;
 import android.widget.Button;
 
 import com.moldedbits.ottoruntimesubscriptions.models.Model;
+import com.moldedbits.ottoruntimesubscriptions.models.MultiEventModel;
 import com.moldedbits.ottoruntimesubscriptions.models.Model1;
 import com.moldedbits.ottoruntimesubscriptions.models.Model2;
-import com.moldedbits.ottoruntimesubscriptions.models.Model3;
 import com.moldedbits.ottoruntimesubscriptions.models.events.Event1;
+import com.moldedbits.ottoruntimesubscriptions.models.events.Event1Delegate;
 import com.moldedbits.ottoruntimesubscriptions.models.events.Event2;
+import com.moldedbits.ottoruntimesubscriptions.models.events.Event2Delegate;
 import com.moldedbits.ottoruntimesubscriptions.models.events.Event3;
+import com.moldedbits.ottoruntimesubscriptions.models.events.Event3Delegate;
 
 public class MainActivity extends AppCompatActivity {
 
     private Model mModel1;
     private Model mModel2;
-    private Model mModel3;
+    private MultiEventModel mMultiEventModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +43,24 @@ public class MainActivity extends AppCompatActivity {
 
         mModel1 = new Model1();
         mModel2 = new Model2();
-        mModel3 = new Model3();
+        mMultiEventModel = new MultiEventModel();
 
         setupView();
     }
 
     @Override
     protected void onResume() {
-        mModel1.runtimeSubscribe();
-        mModel2.runtimeSubscribe();
-        mModel3.runtimeSubscribe();
+        if(mModel1.getModelType() == Model.ModelType.MODEL_1) {
+            mModel1.runtimeSubscribe();
+        }
+
+        if(mModel2.getModelType() == Model.ModelType.MODEL_2) {
+            mModel2.runtimeSubscribe();
+        }
+
+        mMultiEventModel.runtimeSubscribe(new Event1Delegate(mMultiEventModel));
+        mMultiEventModel.runtimeSubscribe(new Event2Delegate(mMultiEventModel));
+        mMultiEventModel.runtimeSubscribe(new Event3Delegate(mMultiEventModel));
         super.onResume();
     }
 
@@ -57,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         mModel1.unsubscribe();
         mModel2.unsubscribe();
-        mModel3.unsubscribe();
+        mMultiEventModel.unsubscribe();
         super.onPause();
     }
 

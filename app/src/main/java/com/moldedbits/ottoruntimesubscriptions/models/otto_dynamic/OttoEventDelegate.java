@@ -4,7 +4,7 @@ import com.moldedbits.ottoruntimesubscriptions.BaseApplication;
 
 /**
  * A class which essentially just pass around an otto event
- * It acts as a receiver and passes event further
+ * It acts as a receiver and passes event further to interested party
  * Created by abhishek on 05/07/16.
  */
 
